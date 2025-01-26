@@ -1,101 +1,119 @@
-import Image from "next/image";
 
-export default function Home() {
+"use client";
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import Menu from './components/Menu';
+import Menuitem from './components/Menuitem';
+import SectionHeaders from './components/SectionHeaders';
+
+const Page = () => {
+  const [menuItems, setMenuItems] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const r = await fetch("/api/menu");
+      const res = await r.json();
+      if (res.ok) {
+        setMenuItems(res.finduser);
+      } else {
+        console.log("This isn't working");
+      }
+    };
+    getData();
+  }, []);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div>
+      <Hero />
+      <div className="mt-12"> {/* Added margin to push the menu section down */}
+        <Menu />
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+      {/* <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6'>
+        {menuItems.slice(0, 3).map((item) => (
+          <article key={item._id}>
+            <Menuitem
+              name={item.name}
+              desc={item.desc}
+              baseprice={item.baseprice}
+              userImage={item.userImage}
+              sizes={item.sizes}
+              ingredients={item.ingredients}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </article>
+        ))}
+      </div> */}
+
+    {/* <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6'>
+        {menuItems.slice(0, 3).map((item) => (
+          <article key={item._id}>
+            <Menuitem
+              name={item.name}
+              desc={item.desc}
+              baseprice={item.baseprice}
+              userImage={item.userImage}
+              sizes={item.sizes}
+              ingredients={item.ingredients}
+            />
+          </article>
+        ))}
+      </div> */}
+      <section className="mt-12">
+        <div className="text-center">
+          {/* <h2 className="text-3xl font-semibold text-gray-800">Deals of the day</h2> */}
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {menuItems.slice(0, 3).map((item) => (
+          <article key={item._id}>
+            <Menuitem
+              name={item.name}
+              desc={item.desc}
+              baseprice={item.baseprice}
+              userImage={item.userImage}
+              sizes={item.sizes}
+              ingredients={item.ingredients}
+            />
+          </article>
+        ))}
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      <section className='text-center my-16' id='about'>
+  <SectionHeaders mainheader={""} subheader={"About us"} />
+  <div className='mx-auto max-w-2xl mt-4 text-dark flex flex-col gap-4'>
+    <p>
+      Welcome to <strong>Take A Slice</strong>, where we bring delicious meals to your doorstep with just a few clicks! 
+      We are passionate about connecting people with incredible food experiences, making your cravings a delightful journey.
+    </p>
+    <p>
+      At <strong>Take A Slice</strong>, we prioritize quality, convenience, and variety. Our carefully selected menu offers something for everyone—from gourmet delights to everyday comfort food. Each dish is crafted with fresh ingredients and a whole lot of love.
+    </p>
+    <p>
+      Whether you're dining solo, hosting a gathering, or looking to discover new flavors, our app simplifies the process with a seamless interface, real-time updates, and reliable service. Your satisfaction is our mission!
+    </p>
+    <p>
+      Thank you for making us a part of your food journey. Let’s create delicious memories together!
+    </p>
+  </div>
+</section>
+
+
+<section className='text-center my-8' id='contact'>
+  <SectionHeaders subheader={"Get in Touch"} mainheader={"Contact Us"} />
+  <div className="my-8">
+    <a href="tel:91-8143251139" className='text-4xl mt-8 block'>
+      8143251139
+    </a>
+    <a href="mailto:powerrangersyuvan@gmail.com" className='text-xl text-blue-600 underline'>
+      powerrangersyuvan@gmail.com
+    </a>
+  </div>
+</section>
+
     </div>
   );
-}
+};
+export default Page;
+
