@@ -31,35 +31,9 @@ const Page = () => {
         <Menu />
       </div>
 
-      {/* <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6'>
-        {menuItems.slice(0, 3).map((item) => (
-          <article key={item._id}>
-            <Menuitem
-              name={item.name}
-              desc={item.desc}
-              baseprice={item.baseprice}
-              userImage={item.userImage}
-              sizes={item.sizes}
-              ingredients={item.ingredients}
-            />
-          </article>
-        ))}
-      </div> */}
 
-    {/* <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6'>
-        {menuItems.slice(0, 3).map((item) => (
-          <article key={item._id}>
-            <Menuitem
-              name={item.name}
-              desc={item.desc}
-              baseprice={item.baseprice}
-              userImage={item.userImage}
-              sizes={item.sizes}
-              ingredients={item.ingredients}
-            />
-          </article>
-        ))}
-      </div> */}
+
+
       <section className="mt-12">
         <div className="text-center">
           {/* <h2 className="text-3xl font-semibold text-gray-800">Deals of the day</h2> */}
